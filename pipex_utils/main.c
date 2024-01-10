@@ -6,7 +6,13 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/09 16:00:43 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:42:40 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/pipex.h"
+
+int main (void)
+{
+	return;
+}
