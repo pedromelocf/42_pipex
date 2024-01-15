@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/15 15:00:24 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:10:58 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int main (int argc, char **argv, char **envp)
 		if (s_pipex.pid == 0) //child process
 		{
 			s_pipex.fd_parent = dup(open(argv[3], O_RDONLY));
-			s_pipex.fd_parent = execve(s_pipex.pathname[0], s_pipex.argv[2], s_pipex.envp);
+			execve(s_pipex.pathname[0], argv[2], envp);
 		}
 		else if (s_pipex.pid > 0) //parent process
 		{
