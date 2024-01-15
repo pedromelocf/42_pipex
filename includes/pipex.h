@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:40 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/15 11:57:01 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/15 14:36:51 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,14 @@
 
 typedef struct s_pipex
 {
+	pid_t	pid;
 	char	**argv;
 	char	**envp;
-	char	**comands;
+	char	**pathname;
 	int		argc;
-	int		*fd;
+	int		fd;
+	int		fd_child;
+	int		fd_parent;
 }			t_pipex;
 
 #endif

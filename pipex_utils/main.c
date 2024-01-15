@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/15 13:13:01 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:00:24 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,27 @@
 int main (int argc, char **argv, char **envp)
 {
 	t_pipex		s_pipex;
-	int fd;
+
 	int validation;
 
 	if (argc != 5)
 		return(1);
-	fd = open(argv[1], O_RDWR);
-	if (fd < 0)
+	s_pipex.fd = open(argv[1], O_RDWR);
+	if (s_pipex.fd < 0)
 		printf("no such file or directory: %s\n", argv[1]);
+		return 1;
 	validation = validate_command(char **argv, char **envp);
 	if (validation == 0) // os dois comandos existem
-		fork;
+		s_pipex.pid = fork;
+		if (s_pipex.pid == 0) //child process
+		{
+			s_pipex.fd_parent = dup(open(argv[3], O_RDONLY));
+			s_pipex.fd_parent = execve(s_pipex.pathname[0], s_pipex.argv[2], s_pipex.envp);
+		}
+		else if (s_pipex.pid > 0) //parent process
+		{
+			wait(NULL);
+		}
 	else if (validation == 1) // argv[3] existe e argv[2] não existe
 		tentar executar segundo comando;
 		printar que o primeiro comando é invalido;
