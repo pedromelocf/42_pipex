@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/16 10:59:00 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:27:58 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,18 @@ int main (int argc, char **argv, char **envp)
 		if (s_pipex.pid == 0) //child process
 		{
 			close(s_pipex.pipe_fd[0]);
-			dup2(s_pipex.fd, s_pipex.pipe_fd[1]);
-			execve(s_pipex.pathname[0], argv[1], envp);
+			dup2(s_pipex.pipe_fd[1], STDOUT_FILENO);
 			close(s_pipex.pipe_fd[1]);
+			execve(s_pipex.pathname[0], argv[1], envp);
 			exit;
 		}
 		else if (s_pipex.pid > 0) //parent process
 		{
 			wait(NULL);
+			close(s_pipex.pipe_fd[1]);
+			void *buffer = read(s_pipex.pipe_fd[0], buffer, 1024);
+			close(s_pipex.pipe_fd[0]);
+			execve(s_pipex.pathname[1], argv[4], envp);
 		}
 	}
 	else if (validation == 1) // argv[3] é um comando valido e argv[2] não é um comando valido
@@ -49,5 +53,6 @@ int main (int argc, char **argv, char **envp)
 	else // nenhum dos comandos são validos
 		printar que o segundo comando é invalido;
 		printar que o primeiro comando é invalido;
+	close(s_pipex.fd);
 	return 0;
 }
