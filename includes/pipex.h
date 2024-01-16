@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:40 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/16 19:28:45 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:39:51 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_pipex
 	int		validation;
 }			t_pipex;
 
-t_pipex init_pipex(char **argv, char **envp);
+t_pipex validate_command(char **argv, char **envp);
+t_pipex *init_pipex(void);
 
 #endif
