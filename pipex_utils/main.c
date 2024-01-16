@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/16 19:56:11 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:57:20 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 			s_pipex->pid = fork();
 			if (s_pipex->pid == 0) //child process cmd2
 			{
-				waitpid(pid_child1,&);
+				waitpid(pid_child1,&s_pipex->status, 0);
 				close(s_pipex->pipe_fd[1]);
 				dup2(s_pipex->pipe_fd[0], STDIN_FILENO);
 				close(s_pipex->pipe_fd[0]);
@@ -79,6 +79,7 @@ int	main(int argc, char **argv, char **envp)
 			printf("invalid command: %s\n", argv[3]); //printar que o segundo comando é invalido;
 			printf("invalid command: %s\n", argv[2]); //printar que o primeiro comando é invalido;
 		}
+		waitpid(pid_child2,&s_pipex->status, 0);
 		free(s_pipex);
 		close(s_pipex->infile);
 		close(s_pipex->outfile);
