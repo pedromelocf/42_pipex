@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/16 19:45:31 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:56:11 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **envp)
 			return (1);
 		}
 		pipe(s_pipex->pipe_fd);
-		s_pipex->validation = validate_commands(argv, envp, s_pipex);
+		validate_commands(argv, envp, s_pipex);
 		if (s_pipex->validation == 0) // os dois comandos existem
 		{
 			s_pipex->id = fork();
@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 			s_pipex->pid = fork();
 			if (s_pipex->pid == 0) //child process cmd2
 			{
-				wait(NULL);
+				waitpid(pid_child1,&);
 				close(s_pipex->pipe_fd[1]);
 				dup2(s_pipex->pipe_fd[0], STDIN_FILENO);
 				close(s_pipex->pipe_fd[0]);

@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:40 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/16 19:45:36 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:55:59 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,18 @@
 
 typedef struct s_pipex
 {
-	pid_t	pid;
+	pid_t	pid_child1;
+	pid_t	pid_child2;
 	char	**pathname;
 	int		pipe_fd[2];
 	int		argc;
 	int		infile;
 	int		outfile;
 	int		validation;
+	int		status;
 }			t_pipex;
 
-t_pipex validate_commands(char **argv, char **envp, t_pipex *s_pipex);
+void	validate_commands(char **argv, char **envp, t_pipex *s_pipex);
 t_pipex *init_pipex(void);
 
 #endif
