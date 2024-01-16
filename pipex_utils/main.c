@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/16 11:27:58 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:02:00 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ int main (int argc, char **argv, char **envp)
 
 	if (argc != 5)
 		return(1);
-	s_pipex.fd = open(argv[1], O_RDWR);
-	if (s_pipex.fd < 0)
+	s_pipex.infile = open(argv[1], O_RDONLY);
+	if (s_pipex.infile < 0)
 		printf("no such file or directory: %s\n", argv[1]);
+		return 1;
+	s_pipex.outfile = open(argv[4], O_TRUNC| O_CREAT | O_RDWR);
+	if (s_pipex.outfile < 0)
+		printf("error opening file: %s\n", argv[4]);
 		return 1;
 	pipe(s_pipex.pipe_fd);
 	validation = validate_command(char **argv, char **envp);
@@ -33,6 +37,7 @@ int main (int argc, char **argv, char **envp)
 			close(s_pipex.pipe_fd[0]);
 			dup2(s_pipex.pipe_fd[1], STDOUT_FILENO);
 			close(s_pipex.pipe_fd[1]);
+			dup2(s_pipex.infile, STDIN_FILENO);
 			execve(s_pipex.pathname[0], argv[1], envp);
 			exit;
 		}
@@ -40,8 +45,9 @@ int main (int argc, char **argv, char **envp)
 		{
 			wait(NULL);
 			close(s_pipex.pipe_fd[1]);
-			void *buffer = read(s_pipex.pipe_fd[0], buffer, 1024);
+			dup2(s_pipex.pipe_fd[0], STDIN_FILENO);
 			close(s_pipex.pipe_fd[0]);
+			dup2(s_pipex.outfile, STDOUT_FILENO);
 			execve(s_pipex.pathname[1], argv[4], envp);
 		}
 	}
@@ -53,6 +59,7 @@ int main (int argc, char **argv, char **envp)
 	else // nenhum dos comandos são validos
 		printar que o segundo comando é invalido;
 		printar que o primeiro comando é invalido;
-	close(s_pipex.fd);
+	close(s_pipex.infile);
+	close(s_pipex.outfile);
 	return 0;
 }
