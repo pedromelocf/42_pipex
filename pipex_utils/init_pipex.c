@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   init_pipex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 16:00:40 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/16 14:01:25 by pmelo-ca         ###   ########.fr       */
+/*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
+/*   Updated: 2024/01/16 14:04:02 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
+#include "../includes/pipex.h"
 
-# define PIPEX_H
-
-# include "../../lib/libft.h"
-# include <stdio.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-
-typedef struct s_pipex
+t_pipex	init_pipex(char **argv, char **envp)
 {
-	pid_t	pid;
-	char	**pathname;
-	int		*pipe_fd;
-	int		argc;
-	int		infile;
-	int		outfile;
-	int		validation;
-}			t_pipex;
+	t_pipex *s_pipex;
 
-t_pipex init_pipex(char **argv, char **envp);
-
-#endif
+	s_pipex = malloc(sizeof(t_pipex));
+	s_pipex->infile = open(argv[1], O_RDONLY);
+	s_pipex->outfile = open(argv[4], O_TRUNC | O_CREAT | O_RDWR);
+	pipe(s_pipex->pipe_fd);
+	s_pipex->pathname = validate_command(argv, envp);
+}
