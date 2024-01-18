@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/16 20:35:02 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:49:01 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 		if (s_pipex->validation == 0) // os dois comandos existem
 		{
 			s_pipex->pid_child1 = fork();
-			if (s_pipex->pid == 0) //child process cmd1
+			if (s_pipex->pid_child1 == 0) //child process cmd1
 			{
 				close(s_pipex->pipe_fd[0]);
 				dup2(s_pipex->pipe_fd[1], STDOUT_FILENO);
@@ -50,9 +50,8 @@ int	main(int argc, char **argv, char **envp)
 				exit(0);
 			}
 			s_pipex->pid_child2 = fork();
-			if (s_pipex->pid == 0) //child process cmd2
+			if (s_pipex->pid_child2 == 0) //child process cmd2
 			{
-				waitpid(pid_child1,&s_pipex->status, 0);
 				close(s_pipex->pipe_fd[1]);
 				dup2(s_pipex->pipe_fd[0], STDIN_FILENO);
 				close(s_pipex->pipe_fd[0]);
