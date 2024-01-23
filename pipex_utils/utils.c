@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/23 11:45:02 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:53:40 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	child_process1(t_pipex *s_pipex)
 		dup2(s_pipex->pipe_fd[1], STDOUT_FILENO);
 		close(s_pipex->pipe_fd[1]);
 		dup2(s_pipex->infile, STDIN_FILENO);
-		execute(s_pipex);
+		execute(s_pipex, s_pipex->argv[1]);
 		exit(0);
 	}
 }
@@ -56,7 +56,7 @@ void	child_process2(t_pipex *s_pipex)
 		dup2(s_pipex->pipe_fd[0], STDIN_FILENO);
 		close(s_pipex->pipe_fd[0]);
 		dup2(s_pipex->outfile, STDOUT_FILENO);
-		execute(s_pipex);
+		execute(s_pipex, s_pipex->argv[4]);
 		exit(0);
 	}
 }
