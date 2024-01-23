@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/23 11:55:51 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:59:49 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,18 @@ int	main(int argc, char **argv, char **env)
 	return (0);
 }
 
-void execute(t_pipex *s_pipex, char **argv)
+void execute(t_pipex *s_pipex, char *argv)
 {
+	char **cmd;
+	int i;
+
+	i = 0;
+	cmd = ft_split(argv, ' ');
+	get_path(&s_pipex, cmd[0]);
 	execve(s_pipex->pathname[0], s_pipex->argv, s_pipex->env);
+}
+
+void get_path(t_pipex **s_pipex, char *cmd)
+{
+
 }
