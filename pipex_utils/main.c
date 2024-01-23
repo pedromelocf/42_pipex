@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/23 11:05:54 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:45:32 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ int	main(int argc, char **argv, char **env)
 		free(s_pipex);
 	}
 	else
-		printf("Bad arguments.");
+		ft_printf("./pipex file1 cmd1 cmd2 file2.\n");
 	return (0);
+}
+
+void execute(t_pipex *s_pipex)
+{
+	
+	execve(s_pipex->pathname[0], s_pipex->argv, s_pipex->env);
 }
