@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/18 17:49:01 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:00:00 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,11 @@ int	main(int argc, char **argv, char **envp)
 		{
 			dup2(s_pipex->outfile, STDOUT_FILENO);
 			execve(s_pipex->pathname[1], argv[3], envp);
-			printf("no such file or directory: %s\n", argv[1]);
-			free(s_pipex);
-			return (1);
+			return (clean_print_return(1, "no such file or directory", argv[1], s_pipex));
 		}
 		s_pipex->outfile = open(argv[4], O_TRUNC | O_CREAT | O_RDWR);
 		if (s_pipex->outfile < 0) // outfile não existe/ não pode ser criado
-		{
-			printf("error opening file: %s\n", argv[4]);
-			free(s_pipex);
-			return (1);
-		}
+			return (clean_print_return(1, "error opening file:", argv[4], s_pipex));
 		pipe(s_pipex->pipe_fd);
 		validate_commands(argv, envp, s_pipex);
 		if (s_pipex->validation == 0) // os dois comandos existem
@@ -78,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 			printf("invalid command: %s\n", argv[3]); //printar que o segundo comando é invalido;
 			printf("invalid command: %s\n", argv[2]); //printar que o primeiro comando é invalido;
 		}
-		waitpid(pid_child2,&s_pipex->status, 0);
+		waitpid(s_pipex->pid_child2,&s_pipex->status, 0);
 		free(s_pipex);
 		close(s_pipex->infile);
 		close(s_pipex->outfile);
