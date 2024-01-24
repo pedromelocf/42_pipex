@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:40 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/23 15:32:12 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:17:36 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 # define PIPEX_H
 
-# include "../../lib/libft.h"
-# include <stdio.h>
+# include "../lib/libft.h"
+# include "../lib/gnl/get_next_line.h"
+# include "../lib/printf/ft_printf.h"
 # include <sys/types.h>
 # include <sys/wait.h>
 

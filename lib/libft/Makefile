@@ -36,16 +36,16 @@ SRCS = ft_isalpha.c \
 	ft_putnbr_fd.c
 
 OBJ = $(SRCS:.c=.o)
-INCLUDES = libft.h
+INCLUDES = ../libft.h
 FLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 
-%.o: %.c libft.h
+%.o: %.c $(INCLUDES)
 	$(CC) $(FLAGS) -c $< -o $@
-	ar rc $(NAME) $@
+	ar rcs $(NAME)  $@
 
 clean :
 	rm -f $(OBJ)
