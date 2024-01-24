@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/24 11:38:28 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:39:53 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ int	main(int argc, char **argv, char **env)
 	{
 		s_pipex = init_pipex(argv, env);
 		child_process1(s_pipex);
+		waitpid(s_pipex->pid_child1, NULL, 0);
 		child_process2(s_pipex);
-		waitpid(s_pipex->pid_child2, &s_pipex->status, 0);
+		waitpid(s_pipex->pid_child2, NULL, 0);
 		close(s_pipex->infile);
 		close(s_pipex->outfile);
 		free(s_pipex);
@@ -31,42 +32,53 @@ int	main(int argc, char **argv, char **env)
 	return (0);
 }
 
-void	execute(t_pipex *s_pipex, char *argv)
+t_pipex	*init_pipex(char **argv, char **env)
 {
-	char	**cmd;
-	char	*path;
-	int		i;
+	t_pipex	*s_pipex;
 
-	i = 0;
-	cmd = ft_split(argv, ' ');
-	path = get_path(s_pipex, cmd[0]);
-	if (!path)
-		path = cmd[0];
-	execve(path, cmd, s_pipex->env);
+	s_pipex = malloc(sizeof(t_pipex));
+	s_pipex->argv = argv;
+	s_pipex->env = env;
+	if (pipe(s_pipex->pipe_fd) == -1)
+		exit(0);
+	return (s_pipex);
 }
 
-char	*get_path(t_pipex *s_pipex, char *cmd)
+void	child_process1(t_pipex *s_pipex)
 {
-	char	*part_path;
-	char	*path;
-	char	**paths;
-	int		i;
-
-	i = 0;
-	if (ft_strchr(&cmd[0], '/'))
-		return (NULL);
-	while (!(ft_strnstr(s_pipex->env[i], "PATH=", 5)))
-		i++;
-	i += 5;
-	paths = ft_split(s_pipex->env[i], ':');
-	i = 0;
-	while (paths[i])
+	s_pipex->pid_child1 = fork();
+	if (s_pipex->pid_child1 == 0)
 	{
-		part_path = ft_strjoin(&path[i], "/");
-		path = ft_strjoin(&part_path[i], cmd);
-		if (access(path, X_OK))
-			return (path);
-		i++;
+		s_pipex->infile = open(s_pipex->argv[1], O_RDONLY);
+		if (s_pipex->infile == -1)
+		{
+			exit(1);
+		}
+		close(s_pipex->pipe_fd[0]);
+		dup2(s_pipex->pipe_fd[1], STDOUT_FILENO);
+		close(s_pipex->pipe_fd[1]);
+		dup2(s_pipex->infile, STDIN_FILENO);
+		execute(s_pipex, s_pipex->argv[1]);
+		exit(0);
 	}
-	return (NULL);
+}
+
+void	child_process2(t_pipex *s_pipex)
+{
+	s_pipex->pid_child2 = fork();
+	if (s_pipex->pid_child2 == 0)
+	{
+		s_pipex->outfile = open(s_pipex->argv[4], O_CREAT | O_RDWR | O_TRUNC,
+				S_IRWXU | S_IRWXG | S_IRWXO);
+		if (s_pipex->outfile == -1)
+		{
+			exit(1);
+		}
+		close(s_pipex->pipe_fd[1]);
+		dup2(s_pipex->pipe_fd[0], STDIN_FILENO);
+		dup2(s_pipex->outfile, STDOUT_FILENO);
+		close(s_pipex->pipe_fd[0]);
+		execute(s_pipex, s_pipex->argv[4]);
+		exit(0);
+	}
 }

@@ -6,57 +6,48 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/23 11:53:40 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:37:17 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-t_pipex	*init_pipex(char **argv, char **env)
+void	execute(t_pipex *s_pipex, char *argv)
 {
-	t_pipex	*s_pipex;
+	char	**cmd;
+	char	*path;
+	int		i;
 
-	s_pipex = malloc(sizeof(t_pipex));
-	s_pipex->argv = argv;
-	s_pipex->env = env;
-	pipe(s_pipex->pipe_fd);
-	return (s_pipex);
+	i = 0;
+	cmd = ft_split(argv, ' ');
+	path = get_path(s_pipex, cmd[0]);
+	if (!path)
+		path = cmd[0];
+	execve(path, cmd, s_pipex->env);
 }
 
-void	child_process1(t_pipex *s_pipex)
+char	*get_path(t_pipex *s_pipex, char *cmd)
 {
-	s_pipex->pid_child1 = fork();
-	if (s_pipex->pid_child1 == 0)
-	{
-		s_pipex->infile = open(s_pipex->argv[1], O_RDONLY);
-		if (s_pipex->infile == -1)
-		{
-			exit(1);
-		}
-		close(s_pipex->pipe_fd[0]);
-		dup2(s_pipex->pipe_fd[1], STDOUT_FILENO);
-		close(s_pipex->pipe_fd[1]);
-		dup2(s_pipex->infile, STDIN_FILENO);
-		execute(s_pipex, s_pipex->argv[1]);
-		exit(0);
-	}
-}
+	char	*part_path;
+	char	*path;
+	char	**paths;
+	int		i;
 
-void	child_process2(t_pipex *s_pipex)
-{
-	s_pipex->pid_child2 = fork();
-	if (s_pipex->pid_child2 == 0)
+	i = 0;
+	if (ft_strchr(&cmd[0], '/'))
+		return (NULL);
+	while (!(ft_strnstr(s_pipex->env[i], "PATH=", 5)))
+		i++;
+	i += 5;
+	paths = ft_split(s_pipex->env[i], ':');
+	i = 0;
+	while (paths[i])
 	{
-		s_pipex->outfile = open(s_pipex->argv[4], O_TRUNC | O_CREAT | O_RDWR);
-		if (s_pipex->outfile == -1)
-		{
-			exit(1);
-		}
-		close(s_pipex->pipe_fd[1]);
-		dup2(s_pipex->pipe_fd[0], STDIN_FILENO);
-		close(s_pipex->pipe_fd[0]);
-		dup2(s_pipex->outfile, STDOUT_FILENO);
-		execute(s_pipex, s_pipex->argv[4]);
-		exit(0);
+		part_path = ft_strjoin(&path[i], "/");
+		path = ft_strjoin(&part_path[i], cmd);
+		if (access(path, X_OK))
+			return (path);
+		i++;
 	}
+	return (NULL);
 }
