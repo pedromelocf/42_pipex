@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/25 11:59:07 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:39:12 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	execute(t_pipex *s_pipex, char *argv)
 char	*get_path(t_pipex *s_pipex, char *cmd)
 {
 	char	*part_path;
-	char	*path;
+	char	*possible_path;
 	char	**paths;
 	int		i;
 
@@ -43,9 +43,9 @@ char	*get_path(t_pipex *s_pipex, char *cmd)
 	while (paths[i])
 	{
 		part_path = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(part_path, cmd);
-		if (!(access(path, X_OK)))
-			return (path);
+		possible_path = ft_strjoin(part_path, cmd);
+		if (!(access(possible_path, X_OK)))
+			return (possible_path);
 		i++;
 	}
 	return (NULL);
