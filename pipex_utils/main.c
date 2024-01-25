@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/24 15:07:07 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/25 12:02:56 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **env)
 		child_process1(s_pipex);
 		waitpid(s_pipex->pid_child1, NULL, 0);
 		child_process2(s_pipex);
-		waitpid(s_pipex->pid_child2, NULL, 0);
+		// waitpid(s_pipex->pid_child2, NULL, 0);
 		close(s_pipex->infile);
 		close(s_pipex->outfile);
 		free(s_pipex);

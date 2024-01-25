@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:40 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/24 13:29:59 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:11:18 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "../lib/gnl/get_next_line.h"
 # include "../lib/libft.h"
 # include "../lib/printf/ft_printf.h"
-#include <sys/wait.h>
-#include <sys/stat.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
 
 typedef struct s_pipex
 {

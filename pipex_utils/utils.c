@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/25 10:33:47 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:59:07 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,7 @@ char	*get_path(t_pipex *s_pipex, char *cmd)
 		part_path = ft_strjoin(paths[i], "/");
 		path = ft_strjoin(part_path, cmd);
 		if (!(access(path, X_OK)))
-		{
-			dprintf(2, "%s\n", path);
 			return (path);
-		}
 		i++;
 	}
 	return (NULL);
