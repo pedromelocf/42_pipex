@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/25 13:22:08 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:41:44 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ int	main(int argc, char **argv, char **env)
 		s_pipex = init_pipex(argv, env);
 		child_process1(s_pipex);
 		child_process2(s_pipex);
-		close(s_pipex->infile);
-		close(s_pipex->outfile);
-		free(s_pipex);
+		clean_data(s_pipex);
 	}
 	else
 		ft_printf("./pipex file1 cmd1 cmd2 file2.\n");
