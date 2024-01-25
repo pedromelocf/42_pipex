@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/25 13:43:33 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:43:53 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,30 @@ char	*get_path(t_pipex *s_pipex, char *cmd)
 		part_path = ft_strjoin(paths[i], "/");
 		possible_path = ft_strjoin(part_path, cmd);
 		if (!(access(possible_path, X_OK)))
+		{
+			clean_child_data(paths, NULL, part_path);
 			return (possible_path);
+		}
 		i++;
 	}
+	clean_child_data(paths, possible_path, part_path);
 	return (NULL);
 }
 
-void clean_data(t_pipex *s_pipex)
+void	clean_child_data(char **matrix, char *possible_path, char *part_path)
 {
-	close(s_pipex->infile);
-	close(s_pipex->outfile);
-	free(s_pipex);
+	clean_matrix(matrix);
+	if (possible_path)
+		free(possible_path);
+	free(part_path);
+}
+
+void	clean_matrix(char **matrix)
+{
+	int	x;
+
+	x = 0;
+	while (matrix[x])
+		free(matrix[x++]);
+	free(matrix);
 }

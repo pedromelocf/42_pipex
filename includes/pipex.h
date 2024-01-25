@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:40 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/25 13:45:20 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:44:15 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void		child_process1(t_pipex *s_pipex);
 void		child_process2(t_pipex *s_pipex);
 void		execute(t_pipex *s_pipex, char *argv);
 char		*get_path(t_pipex *s_pipex, char *cmd);
-void		clean_data(t_pipex *s_pipex);
+void		clean_child_data(char **matrix, char *possible_path,
+				char *part_path);
+void		clean_matrix(char **matrix);
 
 #endif
