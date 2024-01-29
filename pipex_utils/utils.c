@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/29 10:15:51 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:04:01 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	execute(t_pipex *s_pipex, char *argv)
 		path = cmd[0];
 	execve(path, cmd, s_pipex->env);
 	clean_matrix(cmd);
-	free(path);
 }
 
 char	*get_path(t_pipex *s_pipex, char *cmd)
