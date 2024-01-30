@@ -30,6 +30,8 @@ MESSAGE6 = "-----------------Copying libfprintf.a Binarie----------------"
 all: libft $(NAME)
 
 $(NAME): $(PIPEX_OBJ)
+	@ echo $(MESSAGE6)
+	@ echo ' '
 	@ echo $(MESSAGE1)
 	@ $(CC) $(FLAGS) $(PIPEX_OBJ) $(LIB_PATH) -o $(NAME)
 	@ echo ' '
@@ -44,6 +46,7 @@ $(PIPEX_SRC_PATH)%.o: $(PIPEX_SRC_PATH)%.c $(PIPEX_INCLUDES)
 
 clean :
 	@ rm -f $(PIPEX_OBJ) $(LIBFT_PATH) $(LIB_PATH) $(GNL_OBJ) $(PRINTF_OBJ)
+	@ echo ' '
 	@ echo $(MESSAGE4)
 	@ echo ' '
 
@@ -57,7 +60,6 @@ re : fclean all
 
 libft :
 	@ $(MAKEFLAG) -C $(LIBFT_DIR)
-	@ echo $(MESSAGE6)
 	@ echo ' '
 
 .PHONY: all clean fclean re libft
