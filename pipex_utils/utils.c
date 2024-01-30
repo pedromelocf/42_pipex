@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/30 10:55:35 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:08:00 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	clean_matrix(char **matrix)
 	free(matrix);
 }
 
-int	error_handler(t_pipex *s_pipex, int error)
+void	error_handler(t_pipex *s_pipex, int error)
 {
 	if (error == 1)
 	{
