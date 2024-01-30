@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/30 14:46:31 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:47:36 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int argc, char **argv, char **env)
 {
 	t_pipex	*s_pipex;
-	int		error;
+	int		exit_status;
 	if (argc == 5)
 	{
 		s_pipex = init_pipex(argv, env);
@@ -28,12 +28,12 @@ int	main(int argc, char **argv, char **env)
 		child_process2(s_pipex);
 		close(s_pipex->pipe_fd[0]);
 		close(s_pipex->pipe_fd[1]);
-		waitpid(s_pipex->pid_child2, &error, 0);
+		waitpid(s_pipex->pid_child2, &exit_status, 0);
 		free (s_pipex);
 	}
 	else
 		error_handler(4, NULL, NULL, NULL);
-	exit(get_exit(error));
+	exit(get_exit(exit_status));
 }
 
 t_pipex	*init_pipex(char **argv, char **env)
