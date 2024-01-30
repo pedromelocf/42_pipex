@@ -19,23 +19,45 @@ FLAGS = -Wall -Werror -Wextra
 CC = cc
 MAKEFLAG += make --no-print-directory
 
+#MESSAGES
+MESSAGE1 = "------------------Compiling Pipex Objects!-------------------"
+MESSAGE2 = "---------------Objects Compiled Successfully!----------------"
+MESSAGE3 = "----------------./pipex Compiled Successfully!---------------"
+MESSAGE4 = "-------------------- All Objects cleaned!--------------------"
+MESSAGE5 = "-------------------- All Binaries cleaned!-------------------"
+MESSAGE6 = "-----------------Copying libfprintf.a Binarie----------------"
+
 all: libft $(NAME)
 
 $(NAME): $(PIPEX_OBJ)
-	$(CC) $(FLAGS) $(PIPEX_OBJ) $(LIB_PATH) -o $(NAME)
+	@ echo $(MESSAGE1)
+	@ $(CC) $(FLAGS) $(PIPEX_OBJ) $(LIB_PATH) -o $(NAME)
+	@ echo ' '
+	@echo $(MESSAGE2)
+	@ echo ' '
+	@ echo $(MESSAGE3)
+	@ echo ' '
+	@ echo ' '
 
 $(PIPEX_SRC_PATH)%.o: $(PIPEX_SRC_PATH)%.c $(PIPEX_INCLUDES)
-	$(CC) $(FLAGS) -c $< -o $@
+	@ $(CC) $(FLAGS) -c $< -o $@
 
 clean :
-	rm -f $(PIPEX_OBJ) $(LIBFT_PATH) $(LIB_PATH) $(GNL_OBJ) $(PRINTF_OBJ)
+	@ rm -f $(PIPEX_OBJ) $(LIBFT_PATH) $(LIB_PATH) $(GNL_OBJ) $(PRINTF_OBJ)
+	@ echo $(MESSAGE4)
+	@ echo ' '
 
 fclean : clean
-	rm -f $(NAME)
+	@ rm -f $(NAME)
+	@ echo $(MESSAGE5)
+	@ echo ' '
+	@ echo ' '
 
 re : fclean all
 
 libft :
-	$(MAKEFLAG) -C $(LIBFT_DIR)
+	@ $(MAKEFLAG) -C $(LIBFT_DIR)
+	@ echo $(MESSAGE6)
+	@ echo ' '
 
-.PHONY: all clean fclean re pipex
+.PHONY: all clean fclean re libft

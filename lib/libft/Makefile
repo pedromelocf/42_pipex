@@ -38,19 +38,37 @@ OBJ = $(SRCS:.c=.o)
 INCLUDES = ../libft.h
 FLAGS = -Wall -Werror -Wextra
 
+#MESSAGES
+MESSAGE1 = "------------------Compiling Libft Objects!------------------"
+MESSAGE2 = "---------------Objects Compiled Successfully!----------------"
+MESSAGE3 = "----------------libft.a Compiled Successfully!---------------"
+MESSAGE4 = "-------------------- Libft Objects cleaned!------------------"
+MESSAGE5 = "-------------------- Libft Binarie cleaned!------------------"
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+	@ echo $(MESSAGE1)
+	@ ar rcs $(NAME) $(OBJ)
+	@ echo ' '
+	@ echo $(MESSAGE2)
+	@ echo ' '
+	@ echo $(MESSAGE3)
+	@ echo ' '
+	@ echo ' '
 
 %.o: %.c $(INCLUDES)
-	$(CC) $(FLAGS) -c $< -o $@
+	@ $(CC) $(FLAGS) -c $< -o $@
 
 clean :
-	rm -f $(OBJ)
+	@ rm -f $(OBJ)
+	@ echo $(MESSAGE4)
+	@ echo ' '
 
 fclean : clean
-	rm -f $(NAME)
+	@ rm -f $(NAME)
+	@ echo $(MESSAGE5)
+	@ echo ' '
 
 re : fclean all
 

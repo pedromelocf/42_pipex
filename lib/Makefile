@@ -33,27 +33,54 @@ FLAGS = -Wall -Werror -Wextra
 CC = cc
 MAKEFLAG += make --no-print-directory
 
+#MESSAGES
+MESSAGE1 = "--------------Compiling Get Next Line Objects!---------------"
+MESSAGE2 = "-------------GNL Objects Compiled Successfully!--------------"
+MESSAGE3 = "----------Printf Objects Compiled Successfully!--------------"
+MESSAGE4 = "-------------------- All Objects cleaned!--------------------"
+MESSAGE5 = "-------------------- All Binaries cleaned!-------------------"
+MESSAGE6 = "-------------------- Copying Libft Binarie-------------------"
+MESSAGE7 = "-------------libftprintf.a Compiled Successfully-------------"
+MESSAGE8 = "-----------------Compiling Printf Objects!-------------------"
+
 all: libft $(NAME)
 
 $(NAME): $(GNL_OBJ) $(PRINTF_OBJ)
-	cp $(LIBFT_DIR)/libft.a $(NAME)
-	ar rcs $(NAME) $(GNL_OBJ) $(PRINTF_OBJ)
+	@ echo $(MESSAGE6)
+	@ echo ' '
+	@ cp $(LIBFT_DIR)/libft.a $(NAME)
+	@ echo $(MESSAGE1)
+	@ echo ' '
+	@ echo $(MESSAGE2)
+	@ echo ' '
+	@ echo $(MESSAGE8)
+	@ echo ' '
+	@ echo $(MESSAGE3)
+	@ ar rcs $(NAME) $(GNL_OBJ) $(PRINTF_OBJ)
+	@ echo ' '
+	@ echo $(MESSAGE7)
+	@ echo ' '
+	@ echo ' '
 
 $(GNL_SRC_PATH)%.o: $(GNL_SRC_PATH)%.c $(GNL_INCLUDES)
-	$(CC) $(FLAGS) -c $< -o $@
+	@ $(CC) $(FLAGS) -c $< -o $@
 
 $(PRINTF_SRC_PATH)%.o: $(PRINTF_SRC_PATH)%.c $(PRINTF_INCLUDES)
-	$(CC) $(FLAGS) -c $< -o $@
+	@ $(CC) $(FLAGS) -c $< -o $@
 
 clean :
-	rm -f $(LIB_PATH) $(GNL_OBJ) $(PRINTF_OBJ)
+	@ rm -f $(LIB_PATH) $(GNL_OBJ) $(PRINTF_OBJ)
+	@ echo $(MESSAGE4)
+	@ echo ' '
 
 fclean : clean
-	rm -f $(NAME)
+	@ rm -f $(NAME)
+	@ echo $(MESSAGE5)
+	@ echo ' '
 
 re : fclean all
 
 libft :
-	$(MAKEFLAG) -C $(LIBFT_DIR)
+	@ $(MAKEFLAG) -C $(LIBFT_DIR)
 
 .PHONY: all clean fclean re libft
