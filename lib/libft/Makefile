@@ -41,10 +41,10 @@ FLAGS = -Wall -Werror -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	ar rcs $(NAME) $(OBJ)
 
 %.o: %.c $(INCLUDES)
 	$(CC) $(FLAGS) -c $< -o $@
-	ar rcs $(NAME)  $@
 
 clean :
 	rm -f $(OBJ)
