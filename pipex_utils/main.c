@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/29 15:09:14 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:17:43 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ int	main(int argc, char **argv, char **env)
 		s_pipex = init_pipex(argv, env);
 		child_process1(s_pipex);
 		child_process2(s_pipex);
+		close(s_pipex->pipe_fd[0]);
+		close(s_pipex->pipe_fd[1]);
+		waitpid(s_pipex->pid_child2, NULL, 0);
 		free(s_pipex);
 	}
 	else
@@ -59,7 +62,6 @@ void	child_process1(t_pipex *s_pipex)
 
 void	child_process2(t_pipex *s_pipex)
 {
-	waitpid(s_pipex->pid_child1, NULL, 0);
 	s_pipex->pid_child2 = fork();
 	if (s_pipex->pid_child2 == 0)
 	{
