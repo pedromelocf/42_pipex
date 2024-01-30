@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/29 15:11:47 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:17:18 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ void	execute(t_pipex *s_pipex, char *argv)
 {
 	char	**cmd;
 	char	*path;
-	int		i;
 
-	i = 0;
 	cmd = ft_split(argv, ' ');
 	path = get_path(s_pipex, cmd[0]);
 	if (!path)
