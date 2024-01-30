@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/30 11:49:31 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:55:32 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,15 @@ void	error_handler(int error)
 {
 	if (error == 1)
 	{
-		perror("Error opening pipe.");
+		ft_putstr_fd("Error opening pipe.\n", 2);
 	}
 	else if (error == 2)
 	{
-		perror("zsh: no such file or directory");
+		ft_putstr_fd("zsh: no such file or directory\n", 2);
 	}
 	else if (error == 127)
 	{
-		perror("zsh: command not found");
+		ft_putstr_fd("zsh: command not found\n", 2);
 	}
 	exit(error);
 }
