@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/30 14:43:35 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:46:31 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **env)
 		if (!s_pipex)
 		{
 			error_handler(3, NULL, NULL, NULL);
-			exit(EXIT_FAILURE);
+			exit(3);
 		}
 		child_process1(s_pipex);
 		child_process2(s_pipex);
@@ -48,7 +48,7 @@ t_pipex	*init_pipex(char **argv, char **env)
 	if (pipe(s_pipex->pipe_fd) == -1)
 	{
 		error_handler(1, s_pipex, NULL, NULL);
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 	return (s_pipex);
 }
