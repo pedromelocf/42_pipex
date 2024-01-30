@@ -6,24 +6,11 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/30 13:24:59 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:36:00 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-
-void	execute(t_pipex *s_pipex, char *argv)
-{
-	char	**cmd;
-	char	*path;
-
-	cmd = ft_split(argv, ' ');
-	path = get_path(s_pipex, cmd[0]);
-	if (!path)
-		error_handler(127, s_pipex, cmd, argv);
-	execve(path, cmd, s_pipex->env);
-	clean_matrix(cmd);
-}
 
 char	*get_path(t_pipex *s_pipex, char *cmd)
 {
@@ -55,6 +42,33 @@ char	*get_path(t_pipex *s_pipex, char *cmd)
 	return (NULL);
 }
 
+void		error_handler(int error, t_pipex *s_pipex, char **cmd, char *msg)
+{
+	if (error == 1)
+	{
+		free(s_pipex);
+		ft_putstr_fd("Error initializing pipe.\n", 2);
+	}
+	else if (error == 2)
+	{
+		free(s_pipex);
+		ft_putstr_fd("zsh: no such file or directory: ", 2);
+		ft_dprintf(2, "%s\n", msg);
+	}
+	else if (error == 3)
+		ft_putstr_fd("Error initializing structure.\n", 2);
+	else if (error == 4)
+		ft_putstr_fd("./pipex file1 cmd1 cmd2 file2.\n", 2);
+	else if (error == 127)
+	{
+		ft_putstr_fd("zsh: command not found: ", 2);
+		ft_dprintf(2, "%s\n", msg);
+		clean_matrix(cmd);
+		free(s_pipex);
+	}
+	exit(error);
+}
+
 void	clean_child_data(char **matrix, char *possible_path, char *part_path)
 {
 	if (matrix)
@@ -74,27 +88,7 @@ void	clean_matrix(char **matrix)
 	free(matrix);
 }
 
-void		error_handler(int error, t_pipex *s_pipex, char **cmd, char *msg)
+int	get_exit(int exit)
 {
-	if (error == 1)
-	{
-		free(s_pipex);
-		ft_putstr_fd("Error initializing pipe.\n", 2);
-	}
-	else if (error == 2)
-	{
-		free(s_pipex);
-		ft_putstr_fd("zsh: no such file or directory: ", 2);
-		ft_dprintf(2, "%s\n", msg);
-	}
-	else if (error == 3)
-		ft_putstr_fd("Error initializing structure.\n", 2);
-	else if (error == 127)
-	{
-		ft_putstr_fd("zsh: command not found: ", 2);
-		ft_dprintf(2, "%s\n", msg);
-		clean_matrix(cmd);
-		free(s_pipex);
-	}
-	exit(error);
+	return (exit / 256);
 }

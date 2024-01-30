@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/30 12:47:35 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:43:35 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	main(int argc, char **argv, char **env)
 		free (s_pipex);
 	}
 	else
-		ft_printf("./pipex file1 cmd1 cmd2 file2.\n");
-	exit(error);
+		error_handler(4, NULL, NULL, NULL);
+	exit(get_exit(error));
 }
 
 t_pipex	*init_pipex(char **argv, char **env)
@@ -86,4 +86,17 @@ void	child_process2(t_pipex *s_pipex)
 		execute(s_pipex, s_pipex->argv[3]);
 		exit(EXIT_SUCCESS);
 	}
+}
+
+void	execute(t_pipex *s_pipex, char *argv)
+{
+	char	**cmd;
+	char	*path;
+
+	cmd = ft_split(argv, ' ');
+	path = get_path(s_pipex, cmd[0]);
+	if (!path)
+		error_handler(127, s_pipex, cmd, argv);
+	execve(path, cmd, s_pipex->env);
+	clean_matrix(cmd);
 }

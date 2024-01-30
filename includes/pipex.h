@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:40 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/30 12:52:50 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:36:45 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void		clean_child_data(char **matrix, char *possible_path,
 				char *part_path);
 void		clean_matrix(char **matrix);
 void		error_handler(int error, t_pipex *s_pipex, char **cmd, char *msg);
+int			get_exit(int exit);
 
 #endif
