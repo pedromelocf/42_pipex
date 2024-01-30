@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_conversion.c                              :+:      :+:    :+:   */
+/*   ft_check_conversion_fd.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 19:58:43 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/30 13:23:40 by pmelo-ca         ###   ########.fr       */
+/*   Created: 2024/01/30 13:21:54 by pmelo-ca          #+#    #+#             */
+/*   Updated: 2024/01/30 13:23:38 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./ft_printf.h"
 
-int	ft_check_conversion(const char *str, int i, va_list args)
+int	ft_check_conversion_fd(const char *str, int i, va_list args, int fd)
 {
 	int	length;
 
@@ -20,7 +20,7 @@ int	ft_check_conversion(const char *str, int i, va_list args)
 	if (str[i] == 'c')
 		length += ft_putchar(va_arg(args, int));
 	if (str[i] == 's')
-		length += ft_putstr(va_arg(args, char *));
+		length += ft_putstr_fd(va_arg(args, char *), fd);
 	if (str[i] == 'p')
 		length += ft_put_voidpointer(va_arg(args, char *));
 	if (str[i] == 'd' || str[i] == 'i')

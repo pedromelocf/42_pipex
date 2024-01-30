@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:51:05 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/30 12:51:10 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:20:40 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	ft_put_voidpointer(char *str);
 int	ft_put_hex(unsigned long int nbr, const char *str, int i);
 int	ft_putnbr_hex(unsigned long int nbr, int index, char *base);
 int	ft_check_conversion(const char *str, int i, va_list args);
+int	ft_check_conversion_fd(const char *str, int i, va_list args, int fd);
 int	ft_dprintf(int fd, const char *str, ...);
 
 #endif

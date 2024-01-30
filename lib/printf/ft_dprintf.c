@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_dprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 14:50:49 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/30 13:20:07 by pmelo-ca         ###   ########.fr       */
+/*   Created: 2024/01/30 12:47:50 by pmelo-ca          #+#    #+#             */
+/*   Updated: 2024/01/30 13:24:22 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./ft_printf.h"
 
-int	ft_printf(const char *str, ...)
+int	ft_dprintf(int fd, const char *str, ...)
 {
 	short int	i;
 	int			length;
@@ -26,12 +26,13 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			i++;
-			length += ft_check_conversion(str, i, args);
+			length += ft_check_conversion_fd(str, i, args, fd);
 		}
 		else
-			length += ft_putchar(str[i]);
+			length += ft_putchar_fd(str[i], fd);
 		i++;
 	}
 	va_end(args);
 	return (length);
 }
+
