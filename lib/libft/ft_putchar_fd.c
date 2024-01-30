@@ -6,13 +6,14 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:56:35 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2023/11/17 19:02:04 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/30 12:50:27 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
+	return (1);
 }

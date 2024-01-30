@@ -17,6 +17,7 @@ PRINTF_INCLUDES = ./printf/ft_printf.h
 PRINTF_OBJ = $(addprefix $(PRINTF_SRC_PATH), $(PRINTF_SRCS:.c=.o))
 
 PRINTF_SRCS = ft_check_conversion.c \
+	ft_dprintf.c \
 	ft_printf.c \
 	ft_putchar.c \
 	ft_put_hex.c \
