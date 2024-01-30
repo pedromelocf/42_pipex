@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/30 10:23:31 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:55:35 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	execute(t_pipex *s_pipex, char *argv)
 	cmd = ft_split(argv, ' ');
 	path = get_path(s_pipex, cmd[0]);
 	if (!path)
-		error_handler(s_pipex, 3);
+		error_handler(s_pipex, 127);
 	execve(path, cmd, s_pipex->env);
 	clean_matrix(cmd);
 }
@@ -80,19 +80,16 @@ int	error_handler(t_pipex *s_pipex, int error)
 	{
 		free(s_pipex);
 		ft_putstr_fd("Error opening pipe.\n", 2);
-		exit(1);
 	}
 	else if (error == 2)
 	{
 		ft_putstr_fd("zsh: no such file or directory\n", 2);
 		free(s_pipex);
-		exit(1);
 	}
-	else if (error == 3)
+	else if (error == 127)
 	{
 		ft_putstr_fd("zsh: command not found\n", 2);
 		free(s_pipex);
-		exit(127);
 	}
-	return (0);
+	exit(error);
 }
