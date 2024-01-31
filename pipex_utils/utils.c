@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/30 14:49:37 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/31 10:00:54 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*get_path(t_pipex *s_pipex, char *cmd)
 	return (NULL);
 }
 
-void		error_handler(int exit_status, t_pipex *s_pipex, char **cmd, char *msg)
+void	error_handler(int exit_status, t_pipex *s_pipex, char **cmd, char *msg)
 {
 	if (exit_status == 1)
 	{

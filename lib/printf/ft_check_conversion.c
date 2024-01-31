@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:58:43 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/30 13:23:40 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/31 09:59:38 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,3 @@ int	ft_check_conversion(const char *str, int i, va_list args)
 		length += ft_putchar('%');
 	return (length);
 }
-

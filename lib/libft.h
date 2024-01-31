@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:08:49 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/30 13:19:14 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/31 10:00:02 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 # define LIBFT_H
 
+# include <fcntl.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include <string.h>
-# include <fcntl.h>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -50,7 +49,7 @@ char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 int		ft_putchar_fd(char c, int fd);
-int	ft_putstr_fd(char *s, int fd);
+int		ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 

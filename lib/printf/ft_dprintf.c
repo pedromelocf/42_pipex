@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:47:50 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/30 13:24:22 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/31 09:59:13 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,3 @@ int	ft_dprintf(int fd, const char *str, ...)
 	va_end(args);
 	return (length);
 }
-
