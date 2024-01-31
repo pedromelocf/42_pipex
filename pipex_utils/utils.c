@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/31 12:04:34 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:18:12 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*validate_acess(char *cmd)
 	if (!(access(cmd, X_OK)))
 		return (cmd);
 	else
-		return (NULL);
+		return ("invalid");
 }
 
 void	error_handler(int exit_status, t_pipex *s_pipex, char **cmd, char *msg)
@@ -66,6 +66,14 @@ void	error_handler(int exit_status, t_pipex *s_pipex, char **cmd, char *msg)
 		ft_putstr_fd("Error initializing structure.\n", 2);
 	else if (exit_status == 4)
 		ft_putstr_fd("./pipex file1 cmd1 cmd2 file2.\n", 2);
+	else if (exit_status == 5)
+	{
+		ft_dprintf(2, "zsh: no such file or directory: ");
+		ft_dprintf(2, "%s\n", msg);
+		clean_matrix(cmd);
+		free(s_pipex);
+		exit_status = 127;
+	}
 	else if (exit_status == 127)
 	{
 		ft_dprintf(2, "zsh: command not found: ");
