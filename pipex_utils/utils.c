@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/31 11:47:00 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:48:29 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ char	*get_path(t_pipex *s_pipex, char *cmd)
 	}
 	clean_matrix(paths);
 	return (NULL);
+}
+
+char	*validate_acess(char *cmd)
+{
+	if (!(access(cmd, X_OK)))
+		return (cmd);
+	else
+		return (NULL);
 }
 
 void	error_handler(int exit_status, t_pipex *s_pipex, char **cmd, char *msg)
@@ -88,17 +96,4 @@ void	clean_matrix(char **matrix)
 		free(matrix[x++]);
 	if (matrix)
 		free(matrix);
-}
-
-int	get_exit(int exit)
-{
-	return (exit / 256);
-}
-
-char	*validate_acess(char *cmd)
-{
-	if (!(access(cmd, X_OK)))
-		return (cmd);
-	else
-		return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/31 10:45:26 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:48:09 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv, char **env)
 	}
 	else
 		error_handler(4, NULL, NULL, NULL);
-	exit(get_exit(exit_status));
+	exit(exit_status / 256);
 }
 
 t_pipex	*init_pipex(char **argv, char **env)
