@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/31 09:58:34 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/31 10:45:26 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	execute(t_pipex *s_pipex, char *argv)
 	char	*path;
 
 	cmd = ft_split(argv, ' ');
+	if (!cmd[0])
+		error_handler(127, s_pipex, cmd, argv);
 	path = get_path(s_pipex, cmd[0]);
 	if (!path)
 		error_handler(127, s_pipex, cmd, argv);
