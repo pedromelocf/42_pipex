@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/31 11:28:30 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:47:00 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	clean_child_data(char **matrix, char *possible_path, char *part_path)
 		clean_matrix(matrix);
 	if (possible_path)
 		free(possible_path);
-	free(part_path);
+	if (part_path)
+		free(part_path);
 }
 
 void	clean_matrix(char **matrix)
@@ -85,7 +86,8 @@ void	clean_matrix(char **matrix)
 	x = 0;
 	while (matrix[x])
 		free(matrix[x++]);
-	free(matrix);
+	if (matrix)
+		free(matrix);
 }
 
 int	get_exit(int exit)
