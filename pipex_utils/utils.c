@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/02/01 17:31:59 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:13:23 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,26 @@ char	*validate_acess(char *cmd)
 void	error_handler(int exit_status, t_pipex *s_pipex, char **cmd, char *msg)
 {
 	if (exit_status == 1 || exit_status == 2 || exit_status == 5
-		|| exit_status == 127)
+		|| exit_status == 6 || exit_status == 127)
 	{
 		free(s_pipex);
 		if (exit_status == 1)
-			ft_dprintf(2, "Error initializing pipe.\n");
+			ft_dprintf(2, "pipex: permision denied: %s\n", msg);
 		else if (exit_status == 2)
-			ft_dprintf(2, "zsh: no such file or directory: %s\n", msg);
+			ft_dprintf(2, "pipex: no such file or directory: %s\n", msg);
 		else if (exit_status == 5)
 		{
-			ft_dprintf(2, "zsh: no such file or directory: %s\n", msg);
-			clean_matrix(cmd);
+			ft_dprintf(2, "pipex: no such file or directory: %s\n", msg);
 			exit_status = 127;
 		}
+		else if (exit_status == 6)
+			ft_dprintf(2, "pipex: error initializing pipe.\n");
 		else if (exit_status == 127)
-		{
-			ft_dprintf(2, "zsh: command not found: %s\n", msg);
-			clean_matrix(cmd);
-		}
+			ft_dprintf(2, "pipex: command not found: %s\n", msg);
+		clean_matrix(cmd);
 	}
 	else if (exit_status == 3)
-		ft_dprintf(2, "Error initializing structure.\n");
+		ft_dprintf(2, "pipex: error initializing structure.\n");
 	else if (exit_status == 4)
 		ft_dprintf(2, "./pipex file1 cmd1 cmd2 file2.\n");
 	exit(exit_status);
@@ -93,6 +92,8 @@ void	clean_matrix(char **matrix)
 	int	x;
 
 	x = 0;
+	if (!matrix)
+		return ;
 	while (matrix[x])
 		free(matrix[x++]);
 	if (matrix)

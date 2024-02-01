@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/31 12:44:04 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:09:38 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_pipex	*init_pipex(char **argv, char **env)
 	s_pipex->env = env;
 	if (pipe(s_pipex->pipe_fd) == -1)
 	{
-		error_handler(1, s_pipex, NULL, NULL);
+		error_handler(6, s_pipex, NULL, NULL);
 		exit(1);
 	}
 	return (s_pipex);
@@ -80,7 +80,7 @@ void	child_process2(t_pipex *s_pipex)
 		s_pipex->outfile = open(s_pipex->argv[4], O_CREAT | O_RDWR | O_TRUNC,
 				S_IRWXU | S_IRWXG | S_IRWXO);
 		if (s_pipex->outfile == -1)
-			error_handler(2, s_pipex, NULL, s_pipex->argv[4]);
+			error_handler(1, s_pipex, NULL, s_pipex->argv[4]);
 		close(s_pipex->pipe_fd[1]);
 		dup2(s_pipex->pipe_fd[0], STDIN_FILENO);
 		dup2(s_pipex->outfile, STDOUT_FILENO);
