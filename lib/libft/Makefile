@@ -55,7 +55,6 @@ $(NAME): $(OBJ)
 	@ echo ' '
 	@ echo $(MESSAGE3)
 	@ echo ' '
-	@ echo ' '
 
 %.o: %.c $(INCLUDES)
 	@ $(CC) $(FLAGS) -c $< -o $@

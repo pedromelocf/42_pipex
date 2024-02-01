@@ -60,7 +60,6 @@ $(NAME): $(GNL_OBJ) $(PRINTF_OBJ)
 	@ echo ' '
 	@ echo $(MESSAGE7)
 	@ echo ' '
-	@ echo ' '
 
 $(GNL_SRC_PATH)%.o: $(GNL_SRC_PATH)%.c $(GNL_INCLUDES)
 	@ $(CC) $(FLAGS) -c $< -o $@

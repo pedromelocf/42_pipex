@@ -35,10 +35,9 @@ $(NAME): $(PIPEX_OBJ)
 	@ echo $(MESSAGE1)
 	@ $(CC) $(FLAGS) $(PIPEX_OBJ) $(LIB_PATH) -o $(NAME)
 	@ echo ' '
-	@echo $(MESSAGE2)
+	@	echo $(MESSAGE2)
 	@ echo ' '
 	@ echo $(MESSAGE3)
-	@ echo ' '
 	@ echo ' '
 
 $(PIPEX_SRC_PATH)%.o: $(PIPEX_SRC_PATH)%.c $(PIPEX_INCLUDES)
