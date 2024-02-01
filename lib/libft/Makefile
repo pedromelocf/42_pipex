@@ -48,12 +48,14 @@ MESSAGE5 = "-------------------- Libft Binarie cleaned!------------------"
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	@ echo ' '
 	@ echo $(MESSAGE1)
 	@ ar rcs $(NAME) $(OBJ)
 	@ echo ' '
 	@ echo $(MESSAGE2)
 	@ echo ' '
 	@ echo $(MESSAGE3)
+	@ echo ' '
 	@ echo ' '
 
 %.o: %.c $(INCLUDES)
