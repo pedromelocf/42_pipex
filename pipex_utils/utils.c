@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/02/28 16:46:02 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/02/28 20:52:01 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	error_handler(int exit_status, t_pipex *s_pipex, char **cmd, char *msg)
 		else if (exit_status == 6)
 			ft_dprintf(2, "pipex: error initializing pipe.\n");
 		else if (exit_status == 127)
-			ft_dprintf(2, "%s: command not found\n", msg);
+			ft_dprintf(2, "pipex: %s: command not found\n", msg);
 		clean_matrix(cmd);
 	}
 	else if (exit_status == 3)
