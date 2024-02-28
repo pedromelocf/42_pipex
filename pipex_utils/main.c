@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:42 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/02/28 16:35:21 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/02/28 20:21:17 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	child_process2(t_pipex *s_pipex)
 	s_pipex->pid_child2 = fork();
 	if (s_pipex->pid_child2 == 0)
 	{
-		s_pipex->outfile = open(s_pipex->argv[4], O_CREAT | O_RDWR | O_TRUNC,
+		s_pipex->outfile = open(s_pipex->argv[4], O_CREAT | O_WRONLY | O_TRUNC,
 				S_IRWXU | S_IRWXG | S_IRWXO);
 		if (s_pipex->outfile == -1)
 			error_handler(1, s_pipex, NULL, s_pipex->argv[4]);
