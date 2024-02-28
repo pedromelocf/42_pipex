@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:00:40 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/01/31 11:48:33 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:36:15 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../lib/printf/ft_printf.h"
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 typedef struct s_pipex
 {
