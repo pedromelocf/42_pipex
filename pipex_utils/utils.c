@@ -6,7 +6,7 @@
 /*   By: pmelo-ca <pmelo-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:57:22 by pmelo-ca          #+#    #+#             */
-/*   Updated: 2024/02/01 18:13:23 by pmelo-ca         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:46:02 by pmelo-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,18 @@ void	error_handler(int exit_status, t_pipex *s_pipex, char **cmd, char *msg)
 	{
 		free(s_pipex);
 		if (exit_status == 1)
-			ft_dprintf(2, "pipex: permision denied: %s\n", msg);
+			ft_dprintf(2, "pipex: %s: Permision denied\n", msg);
 		else if (exit_status == 2)
-			ft_dprintf(2, "pipex: no such file or directory: %s\n", msg);
+			ft_dprintf(2, "pipex: %s: No such file or directory\n", msg);
 		else if (exit_status == 5)
 		{
-			ft_dprintf(2, "pipex: no such file or directory: %s\n", msg);
+			ft_dprintf(2, "pipex: %s: No such file or directory\n", msg);
 			exit_status = 127;
 		}
 		else if (exit_status == 6)
 			ft_dprintf(2, "pipex: error initializing pipe.\n");
 		else if (exit_status == 127)
-			ft_dprintf(2, "pipex: command not found: %s\n", msg);
+			ft_dprintf(2, "%s: command not found\n", msg);
 		clean_matrix(cmd);
 	}
 	else if (exit_status == 3)
